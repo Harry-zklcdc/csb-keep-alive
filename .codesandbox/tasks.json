@@ -7,6 +7,11 @@
       "name": "Keep Live",
       "command": "python3 /app/main.py",
       "runAtStart": true
+    },
+    "wireguardProxy": {
+      "name": "Wireguard Proxy",
+      "command": "/usr/local/bin/xray run -c /app/config.json",
+      "runAtStart": true
     }
   }
 }
