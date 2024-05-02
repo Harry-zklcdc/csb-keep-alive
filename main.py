@@ -21,9 +21,9 @@ def keepAlive(tab, sleepTime):
         tab.refresh()
         parsed_url = urlparse(tab.url)
         if not URL_HIDE:
-            logging.info(f'Refresh {parsed_url.scheme + ":" + parsed_url.hostname}')
+            logging.info(f'Refresh {parsed_url.scheme + "://" + parsed_url.hostname}')
         else:
-            logging.info(f'Refresh {mask_middle(parsed_url.scheme + ":" + parsed_url.hostname)}')
+            logging.info(f'Refresh {mask_middle(parsed_url.scheme + "://" + parsed_url.hostname)}')
 
 
 def mask_middle(s):
