@@ -1,6 +1,7 @@
 {
     "name": "KeepLive",
     "build": {
-        "dockerfile": "./Dockerfile"
+      "dockerfile": "./Dockerfile",
+      "context": ".."
     }
-}
+  }

@@ -5,7 +5,7 @@
   "tasks": {
     "KeepLive": {
       "name": "Keep Live",
-      "command": "python3 main.py",
+      "command": "python3 /app/main.py",
       "runAtStart": true
     }
   }
