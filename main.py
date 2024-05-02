@@ -1,7 +1,6 @@
 from DrissionPage import ChromiumPage, ChromiumOptions
 from DrissionPage.common import Keys, Actions
 from threading import Thread
-from urllib.parse import urlparse
 
 import os
 import time
@@ -15,15 +14,27 @@ options.set_argument('--no-sandbox')
 
 URL_HIDE = os.environ.get('URL_HIDE', '') != ''
 
-def keepAlive(tab, sleepTime):
+def keepAlive(tab, url, sleepTime):
     while True:
         time.sleep(sleepTime)
-        tab.refresh()
-        parsed_url = urlparse(tab.url)
-        if not URL_HIDE:
-            logging.info(f'Refresh {parsed_url.scheme + "://" + parsed_url.hostname}')
-        else:
-            logging.info(f'Refresh {mask_middle(parsed_url.scheme + "://" + parsed_url.hostname)}')
+        try:
+            tab.refresh()
+            if not URL_HIDE:
+                logging.info(f'Refresh {url}')
+            else:
+                logging.info(f'Refresh {mask_middle(url)}')
+        except Exception as e:
+            if not URL_HIDE:
+                logging.error(f'Refresh {url} Error: {e}')
+            else:
+                logging.error(f'Refresh {mask_middle(url)} Error: {e}')
+            tab.close()
+            tab = page.new_tab(url=url)
+            if not URL_HIDE:
+                logging.info(f'Reopen {url}')
+            else:
+                logging.info(f'Reopen {mask_middle(url)}')
+            continue
 
 
 def mask_middle(s):
@@ -55,4 +66,4 @@ if __name__ == '__main__':
             logging.info(f'Open {url}')
         else:
             logging.info(f'Open {mask_middle(url)}')
-        Thread(target=keepAlive, args=(tab, sleepTime)).start()
+        Thread(target=keepAlive, args=(tab, url, sleepTime)).start()
