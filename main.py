@@ -34,7 +34,7 @@ def mask_middle(s):
 
 
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', datefmt='%Y/%m/%d %H:%M:%S', level=logging.INFO)
     logging.info('Start KeepAlive')
 
     sleepTime = int(os.environ.get('SLEEP_TIME', '600'))
