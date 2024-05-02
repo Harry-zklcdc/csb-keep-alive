@@ -1,0 +1,6 @@
+{
+    "name": "KeepLive",
+    "build": {
+        "dockerfile": "./Dockerfile"
+    }
+}
